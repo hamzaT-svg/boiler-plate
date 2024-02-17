@@ -15,8 +15,8 @@ export default async function middleware(req: NextRequest) {
     })
     if (!token && path !== "/sign-in") {
         return NextResponse.redirect(new URL("/sign-in", req.url));
-    } else {
-        return NextResponse.next();
+    } else if (token) {
+        return NextResponse.redirect(new URL(path, req.url));
     }
 }
 
